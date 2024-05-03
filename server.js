@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 console.log(`Bearer Token: ${process.env.BEARER_TOKEN}`); // Debugging-Zeile
 
 
