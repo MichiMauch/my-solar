@@ -9,6 +9,7 @@ const port = process.env.PORT || 3000;
 app.use(express.static('public')); // für statische Dateien wie HTML, CSS und JS
 
 app.get('/solar-status', async (req, res) => {
+
     let config = {
         method: 'get',
         url: 'https://vrmapi.victronenergy.com/v2/installations/193415/stats?interval=15mins',
