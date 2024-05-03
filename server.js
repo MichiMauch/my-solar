@@ -20,13 +20,14 @@ app.get('/solar-status', async (req, res) => {
 
   try {
     const response = await axios.request(config);
+    console.log('API Response:', response);  // Log the whole response object
     const data = response.data.records;
     const currentPower = data.Pdc[data.Pdc.length - 1][1];
     const batteryCharge = data.bs[data.bs.length - 1][1];
     res.json({ currentPower: currentPower, batteryCharge: batteryCharge });
   } catch (error) {
-    console.error('Fehler beim Abrufen der Daten:', error);
-    res.status(500).send('Serverfehler');
+    console.error('Complete Error:', error.response);  // Log the complete error response
+    res.status(500).send('Server error');
   }
 });
 
