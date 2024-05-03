@@ -1,4 +1,6 @@
 require('dotenv').config();
+console.log(`Bearer Token: ${process.env.BEARER_TOKEN}`); // Debugging-Zeile
+
 
 const express = require('express');
 const axios = require('axios');
@@ -20,7 +22,7 @@ app.get('/solar-status', async (req, res) => {
     const response = await axios.request(config);
     const data = response.data.records;
     const currentPower = data.Pdc[data.Pdc.length - 1][1];
-    const batteryCharge = data.bs[data.bs.length - 1][1]; // Annahme, dass dies das richtige Feld ist
+    const batteryCharge = data.bs[data.bs.length - 1][1];
     res.json({ currentPower: currentPower, batteryCharge: batteryCharge });
   } catch (error) {
     console.error('Fehler beim Abrufen der Daten:', error);
