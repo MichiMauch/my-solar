@@ -1,13 +1,16 @@
 {
   "name": "my-solar",
   "version": "1.0.0",
-  "description": "",
+  "description": "Solar Dashboard",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Michi Mauch",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.6.8",
