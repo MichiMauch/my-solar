@@ -29,9 +29,14 @@ app.get('/solar-status', async (req, res) => {
         res.status(500).json({
             message: "Fehler beim Laden der Daten.",
             error: error.message,
-            details: error.response ? error.response.data : 'No detailed error available'
+            details: error.response ? {
+                data: error.response.data,
+                status: error.response.status,
+                headers: error.response.headers
+            } : 'No detailed error available'
         });
     }
+    
 });
 
 

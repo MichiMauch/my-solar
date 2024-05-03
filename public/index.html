@@ -13,10 +13,8 @@
 <script>
     async function fetchData() {
       try {
-        //const response = await fetch('/solar-status');
-        const response = await fetch('https://my-solar-eight.vercel.app/solar-status');
-
-        if (!response.ok) {  // Überprüfen, ob der HTTP-Statuscode Erfolg anzeigt
+        const response = await fetch('/solar-status');
+        if (!response.ok) {
             throw new Error(`HTTP status ${response.status} - ${response.statusText}`);
         }
         const data = await response.json();
@@ -24,15 +22,19 @@
         document.getElementById('batteryCharge').textContent = `Aktuelle Batterieladung: ${data.batteryCharge}%`;
       } catch (error) {
         console.error('Fehler beim Abrufen der Daten:', error);
-        // Anzeigen einer detaillierten Fehlermeldung im Browser
         document.getElementById('power').textContent = 'Fehler beim Laden der Daten: ' + error.message;
         document.getElementById('batteryCharge').textContent = 'Fehler beim Laden der Daten: ' + error.message;
+        
+        // Versuch, zusätzliche Fehlerdetails anzuzeigen, wenn vorhanden
+        const errDetails = await error.response.json(); // dies setzt voraus, dass der Fehler ein Response-Objekt ist
+        console.log('Fehlerdetails:', errDetails.details);
       }
     }
   
     fetchData();
     setInterval(fetchData, 10000); // Aktualisiert die Daten alle 10 Sekunden
 </script>
+
 
 </body>
 </html>
