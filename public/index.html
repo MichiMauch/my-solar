@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar Dashboard</title>
+</head>
+<body>
+<h1>Solaranlagen Dashboard</h1>
+<div id="power">Lade aktuelle Wattzahl...</div>
+<div id="batteryCharge">Lade Batterieladung...</div>
+
+<script>
+    async function fetchData() {
+      try {
+        const response = await fetch('/solar-status');
+        const data = await response.json();
+        document.getElementById('power').textContent = `Aktuelle Leistung: ${data.currentPower} Watt`;
+        document.getElementById('batteryCharge').textContent = `Aktuelle Batterieladung: ${data.batteryCharge}%`;
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Daten:', error);
+        document.getElementById('power').textContent = 'Fehler beim Laden der Daten.';
+        document.getElementById('batteryCharge').textContent = 'Fehler beim Laden der Daten.';
+      }
+    }
+  
+    fetchData();
+    setInterval(fetchData, 100000); // Aktualisiert die Daten alle 10 Sekunden
+  </script>
+</body>
+</html>
